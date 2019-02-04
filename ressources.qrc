@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>res/8-Bit Wonder.TTF</file>
+    </qresource>
+</RCC>

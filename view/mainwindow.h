@@ -22,6 +22,8 @@ private:
     //SoundController *sC_;
 
     QGraphicsScene *menuView_;
+
+    QFont pixelFont_;
 };
 
 #endif // MAINWINDOW_H

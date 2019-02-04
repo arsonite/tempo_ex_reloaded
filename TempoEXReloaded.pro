@@ -26,18 +26,14 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
         view/mainwindow.cpp \
         engine/particleemitter.cpp \
-        main.cpp
 
 HEADERS += \
-        mainwindow.h \
         view/mainwindow.h \
         engine/particleemitter.h
 
 FORMS += \
-        mainwindow.ui \
         view/mainwindow.ui
 
 # Default rules for deployment.
@@ -47,3 +43,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 SUBDIRS += \
     TempoEXReloaded.pro
+
+RESOURCES += \
+    ressources.qrc

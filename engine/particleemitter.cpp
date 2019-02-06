@@ -1,19 +1,20 @@
 #include "particleemitter.h"
+#include "particle.h"
 
-ParticleEmitter::ParticleEmitter(QObject *parent,
-                                 int x,
-                                 int y,
-                                 int particleAmount,
-                                 int emitDuration,
-                                 int lifeTime):
+#include <QPen>
+#include <QBrush>
+
+#include <QDebug>
+
+ParticleEmitter::ParticleEmitter(int x, int y, int particleAmount, int emitDuration):
     pos_(x, y),
     particleAmount_(particleAmount),
-    emitDuration_(emitDuration),
-    lifeTime_(lifeTime)
+    emitDuration_(emitDuration)
 {
-    if(parent != nullptr) setParent(parent);
-
     emitDuration_ = 0;
+
+    setRect(0, 0, 10, 10);
+    setPos(x, y);
 
     timer_ = new QTimer();
     connect(timer_, &QTimer::timeout, this, &ParticleEmitter::emitParticles);
@@ -27,10 +28,12 @@ ParticleEmitter::~ParticleEmitter()
 void ParticleEmitter::emitParticles()
 {
     for(int i = 0, n = particleAmount_; i < n; i++) {
-        QGraphicsEllipseItem particle(this);
-        int w = 5;
-        int h = 5;
-        particle.setRect(pos().x()/2-w/2, pos().y()/2-h/2, h, w);
+        Particle *p = new Particle(this);
+        int size = p->getSize()/2;
+        p->setRect(0, 0, size, size);
+        p->setPen(QPen(Qt::NoPen));
+        p->setBrush(QBrush(QColor(255, 0, 0)));
+        p->fly(false);
     }
 }
 

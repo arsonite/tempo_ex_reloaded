@@ -24,6 +24,9 @@ private:
     QGraphicsScene *menuView_;
 
     QFont pixelFont_;
+
+    int width_;
+    int height_;
 };
 
 #endif // MAINWINDOW_H

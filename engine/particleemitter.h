@@ -4,18 +4,16 @@
 #include <QObject>
 #include <QGraphicsRectItem>
 #include <QPoint>
-#include <QTimer>
+#include <QTimer>2
 
-class ParticleEmitter: public QObject, public QGraphicsItem
+class ParticleEmitter: public QObject, public QGraphicsRectItem
 {
 Q_OBJECT
 public:
-    explicit ParticleEmitter(QObject *parent = nullptr,
-                             int x = 0,
+    explicit ParticleEmitter(int x = 0,
                              int y = 0,
                              int particleAmount = 0,
-                             int emitDuration = 0,
-                             int lifeTime = 0);
+                             int emitDuration = 0);
 
     virtual ~ParticleEmitter() override;
 
@@ -36,9 +34,7 @@ private:
 
     int particleAmount_;
     int emitDuration_;
-    int lifeTime_;
     int bezier_;
-    int fadeDuration_;
 
     double angle_;
     double lifeTimeNoiseFactor_;

@@ -23,6 +23,12 @@ MainWindow::MainWindow(QWidget *parent):
     width_ = 900;
     height_ = 700;
 
+    /* Initializing menu controller and view */
+    menuController_ = new MenuController();
+    menuView_ = new MenuView(this);
+
+    //initializeMenu();
+
     // Setting up basic configuration for MainWindow
     ui_->setupUi(this);
     this->setWindowTitle("TempoEX: Reloaded");
@@ -43,9 +49,10 @@ MainWindow::MainWindow(QWidget *parent):
     pixelFont_.setPointSize(20);
 
     // Mandatory menu and start view
-    menuView_ = new QGraphicsScene(this);
-    ui_->view->setScene(menuView_);
+    menuScene_ = new QGraphicsScene(this);
+    ui_->view->setScene(menuScene_);
 
+    // Creating splash screen
     QMovie *ter_splash = new QMovie(":/res/res/gif/ter_splash.gif");
     QLabel *startViewBG = new QLabel();
     startViewBG->move(0, 0);
@@ -53,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent):
     startViewBG->setStyleSheet("QLabel { background-color: transparent; }");
     startViewBG->setMovie(ter_splash);
     ter_splash->start();
-    menuView_->addWidget(startViewBG);
+    menuScene_->addWidget(startViewBG);
 
     std::array<bool, 5> viewSelector;
 }
@@ -66,4 +73,15 @@ MainWindow::MainWindow(QWidget *parent):
 MainWindow::~MainWindow()
 {
     delete ui_;
+    delete menuView_;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    menuController_->keyPressEvent(event);
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    menuController_->keyReleaseEvent(event);
 }

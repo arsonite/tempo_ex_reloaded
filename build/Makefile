@@ -55,18 +55,32 @@ OBJECTS_DIR   = ./
 SOURCES       = ../main.cpp \
 		../view/mainwindow.cpp \
 		../engine/particleemitter.cpp \
-		../engine/particle.cpp qrc_ressources.cpp \
+		../engine/particle.cpp \
+		../controller/menucontroller.cpp \
+		../engine/fileparser.cpp \
+		../view/clickableqlabel.cpp \
+		../view/menuview.cpp qrc_ressources.cpp \
 		moc_mainwindow.cpp \
 		moc_particleemitter.cpp \
-		moc_particle.cpp
+		moc_particle.cpp \
+		moc_menucontroller.cpp \
+		moc_clickableqlabel.cpp \
+		moc_menuview.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		particleemitter.o \
 		particle.o \
+		menucontroller.o \
+		fileparser.o \
+		clickableqlabel.o \
+		menuview.o \
 		qrc_ressources.o \
 		moc_mainwindow.o \
 		moc_particleemitter.o \
-		moc_particle.o
+		moc_particle.o \
+		moc_menucontroller.o \
+		moc_clickableqlabel.o \
+		moc_menuview.o
 DIST          = /Applications/QT/5.12.1/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/qdevice.pri \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/device_config.prf \
@@ -215,7 +229,6 @@ DIST          = /Applications/QT/5.12.1/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/qt_config.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/spec_post.prf \
-		../.qmake.stash \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/mac/sdk.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/toolchain.prf \
@@ -245,10 +258,18 @@ DIST          = /Applications/QT/5.12.1/clang_64/mkspecs/features/spec_pre.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/lex.prf \
 		../../TempoEXReloaded.pro ../view/mainwindow.h \
 		../engine/particleemitter.h \
-		../engine/particle.h ../main.cpp \
+		../engine/particle.h \
+		../controller/menucontroller.h \
+		../engine/fileparser.h \
+		../view/clickableqlabel.h \
+		../view/menuview.h ../main.cpp \
 		../view/mainwindow.cpp \
 		../engine/particleemitter.cpp \
-		../engine/particle.cpp
+		../engine/particle.cpp \
+		../controller/menucontroller.cpp \
+		../engine/fileparser.cpp \
+		../view/clickableqlabel.cpp \
+		../view/menuview.cpp
 QMAKE_TARGET  = TempoEXReloaded
 DESTDIR       = 
 TARGET        = TempoEXReloaded.app/Contents/MacOS/TempoEXReloaded
@@ -419,7 +440,6 @@ Makefile: ../TempoEXReloaded.pro /Applications/QT/5.12.1/clang_64/mkspecs/macx-c
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/qt_config.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/macx-clang/qmake.conf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/exclusive_builds.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/mac/sdk.prf \
 		/Applications/QT/5.12.1/clang_64/mkspecs/features/toolchain.prf \
@@ -603,7 +623,6 @@ Makefile: ../TempoEXReloaded.pro /Applications/QT/5.12.1/clang_64/mkspecs/macx-c
 /Applications/QT/5.12.1/clang_64/mkspecs/features/qt_config.prf:
 /Applications/QT/5.12.1/clang_64/mkspecs/macx-clang/qmake.conf:
 /Applications/QT/5.12.1/clang_64/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /Applications/QT/5.12.1/clang_64/mkspecs/features/exclusive_builds.prf:
 /Applications/QT/5.12.1/clang_64/mkspecs/features/mac/sdk.prf:
 /Applications/QT/5.12.1/clang_64/mkspecs/features/toolchain.prf:
@@ -669,8 +688,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../ressources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /Applications/QT/5.12.1/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../view/mainwindow.h ../engine/particleemitter.h ../engine/particle.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../view/mainwindow.cpp ../engine/particleemitter.cpp ../engine/particle.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../view/mainwindow.h ../engine/particleemitter.h ../engine/particle.h ../controller/menucontroller.h ../engine/fileparser.h ../view/clickableqlabel.h ../view/menuview.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../view/mainwindow.cpp ../engine/particleemitter.cpp ../engine/particle.cpp ../controller/menucontroller.cpp ../engine/fileparser.cpp ../view/clickableqlabel.cpp ../view/menuview.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../view/mainwindow.ui $(DISTDIR)/
 
 
@@ -681,7 +700,6 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r TempoEXReloaded.app
-	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -713,9 +731,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /Applications/QT/5.12.1/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h /Applications/QT/5.12.1/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_particleemitter.cpp moc_particle.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_particleemitter.cpp moc_particle.cpp moc_menucontroller.cpp moc_clickableqlabel.cpp moc_menuview.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_particleemitter.cpp moc_particle.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_particleemitter.cpp moc_particle.cpp moc_menucontroller.cpp moc_clickableqlabel.cpp moc_menuview.cpp
 moc_mainwindow.cpp: ../view/mainwindow.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -753,6 +771,35 @@ moc_particle.cpp: ../engine/particle.h \
 		/Applications/QT/5.12.1/clang_64/bin/moc
 	/Applications/QT/5.12.1/clang_64/bin/moc $(DEFINES) --include /Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded/build/moc_predefs.h -I/Applications/QT/5.12.1/clang_64/mkspecs/macx-clang -I/Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded -I/Applications/QT/5.12.1/clang_64/lib/QtMultimedia.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtNetwork.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Applications/QT/5.12.1/clang_64/lib ../engine/particle.h -o moc_particle.cpp
 
+moc_menucontroller.cpp: ../controller/menucontroller.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		moc_predefs.h \
+		/Applications/QT/5.12.1/clang_64/bin/moc
+	/Applications/QT/5.12.1/clang_64/bin/moc $(DEFINES) --include /Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded/build/moc_predefs.h -I/Applications/QT/5.12.1/clang_64/mkspecs/macx-clang -I/Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded -I/Applications/QT/5.12.1/clang_64/lib/QtMultimedia.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtNetwork.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Applications/QT/5.12.1/clang_64/lib ../controller/menucontroller.h -o moc_menucontroller.cpp
+
+moc_clickableqlabel.cpp: ../view/clickableqlabel.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		moc_predefs.h \
+		/Applications/QT/5.12.1/clang_64/bin/moc
+	/Applications/QT/5.12.1/clang_64/bin/moc $(DEFINES) --include /Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded/build/moc_predefs.h -I/Applications/QT/5.12.1/clang_64/mkspecs/macx-clang -I/Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded -I/Applications/QT/5.12.1/clang_64/lib/QtMultimedia.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtNetwork.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Applications/QT/5.12.1/clang_64/lib ../view/clickableqlabel.h -o moc_clickableqlabel.cpp
+
+moc_menuview.cpp: ../view/menuview.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		moc_predefs.h \
+		/Applications/QT/5.12.1/clang_64/bin/moc
+	/Applications/QT/5.12.1/clang_64/bin/moc $(DEFINES) --include /Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded/build/moc_predefs.h -I/Applications/QT/5.12.1/clang_64/mkspecs/macx-clang -I/Users/burak/Desktop/Projekte/Coding/C++/TempoEXReloaded -I/Applications/QT/5.12.1/clang_64/lib/QtMultimedia.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtNetwork.framework/Headers -I/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Applications/QT/5.12.1/clang_64/lib ../view/menuview.h -o moc_menuview.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -776,9 +823,14 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-main.o: ../main.cpp ../view/mainwindow.h \
+main.o: ../main.cpp ../controller/menucontroller.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../view/mainwindow.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QApplication \
@@ -791,6 +843,12 @@ mainwindow.o: ../view/mainwindow.cpp ../view/mainwindow.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		ui_mainwindow.h \
+		../view/menuview.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../controller/menucontroller.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QString \
 		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
@@ -835,6 +893,46 @@ particle.o: ../engine/particle.cpp ../engine/particle.h \
 		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o particle.o ../engine/particle.cpp
 
+menucontroller.o: ../controller/menucontroller.cpp ../controller/menucontroller.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o menucontroller.o ../controller/menucontroller.cpp
+
+fileparser.o: ../engine/fileparser.cpp ../engine/fileparser.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QString \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QDir \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qdir.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o fileparser.o ../engine/fileparser.cpp
+
+clickableqlabel.o: ../view/clickableqlabel.cpp ../view/clickableqlabel.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QDebug \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clickableqlabel.o ../view/clickableqlabel.cpp
+
+menuview.o: ../view/menuview.cpp ../view/menuview.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/QT/5.12.1/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Applications/QT/5.12.1/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		/Applications/QT/5.12.1/clang_64/lib/QtGui.framework/Headers/qevent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o menuview.o ../view/menuview.cpp
+
 qrc_ressources.o: qrc_ressources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_ressources.o qrc_ressources.cpp
 
@@ -846,6 +944,15 @@ moc_particleemitter.o: moc_particleemitter.cpp
 
 moc_particle.o: moc_particle.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_particle.o moc_particle.cpp
+
+moc_menucontroller.o: moc_menucontroller.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_menucontroller.o moc_menucontroller.cpp
+
+moc_clickableqlabel.o: moc_clickableqlabel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clickableqlabel.o moc_clickableqlabel.cpp
+
+moc_menuview.o: moc_menuview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_menuview.o moc_menuview.cpp
 
 ####### Install
 

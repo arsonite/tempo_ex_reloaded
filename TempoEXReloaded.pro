@@ -30,13 +30,19 @@ SOURCES += \
         view/mainwindow.cpp \
         engine/particleemitter.cpp \
         engine/particle.cpp \
-    controller/menucontroller.cpp
+        controller/menucontroller.cpp \
+        engine/fileparser.cpp \
+        view/clickableqlabel.cpp \
+        view/menuview.cpp
 
 HEADERS += \
         view/mainwindow.h \
         engine/particleemitter.h \
         engine/particle.h \
-    controller/menucontroller.h
+        controller/menucontroller.h \
+        engine/fileparser.h \
+        view/clickableqlabel.h \
+        view/menuview.h
 
 FORMS += \
         view/mainwindow.ui

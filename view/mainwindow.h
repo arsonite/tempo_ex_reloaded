@@ -31,8 +31,6 @@ private:
 
     QFont pixelFont_;
 
-    QGraphicsScene *menuScene_;
-
     MenuController *menuController_;
     MenuView *menuView_;
     //SoundController *soundController_;

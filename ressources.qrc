@@ -2,5 +2,6 @@
     <qresource prefix="/res">
         <file>res/8-Bit Wonder.TTF</file>
         <file>res/gif/ter_splash.gif</file>
+        <file>res/gif/stars_bg.gif</file>
     </qresource>
 </RCC>

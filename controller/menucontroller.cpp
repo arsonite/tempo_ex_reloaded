@@ -1,18 +1,19 @@
 #include "menucontroller.h"
 
-#include <QDebug>
 #include <QApplication>
 
-MenuController::MenuController() {}
+#include <QDebug>
+
+MenuController::MenuController()
+{
+
+}
 
 MenuController::~MenuController() {}
 
 void MenuController::keyPressEvent(QKeyEvent *event)
 {
-    qDebug() << event->key();
-}
-
-void MenuController::keyReleaseEvent(QKeyEvent *event)
-{
-    qDebug() << event->key();
+    auto key = event->key();
+    if(DEFAULT_KEYS_.find(key) == DEFAULT_KEYS_.end()) return;
+    qDebug() << key;
 }

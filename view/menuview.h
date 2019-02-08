@@ -1,11 +1,11 @@
 #ifndef MENUVIEW_H
 #define MENUVIEW_H
 
-#include <QObject>
+#include <QGraphicsScene>
 #include <QMainWindow>
 #include <QKeyEvent>
 
-class MenuView: public QMainWindow
+class MenuView: public QGraphicsScene
 {
 Q_OBJECT
 public:

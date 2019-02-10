@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent):
     QMainWindow(parent),
     ui_(new Ui::MainWindow)
 {
+    /* Pointer to current selected menu navigation point, standard is startView */
     navIndex_ = 4;
 
     pos_max_x_ = width_ = 900;
@@ -68,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent):
     starsViewBG_->resize(width_, height_);
     starsViewBG_->setStyleSheet("QLabel { background-color: transparent; }");
     starsViewBG_->setMovie(stars_bg_);
-    starsViewBG_->setVisible(false);
+    //starsViewBG_->setVisible(false);
     stars_bg_->start();
     menuView_->addWidget(starsViewBG_);
 
@@ -98,41 +99,26 @@ void MainWindow::keyPressed(QString keyName)
         if(nav_[i] != "X") nav_[i] = " ";
     }
 
-    /*
-    std::vector<QString> nav_ = {
-        "X", " ", "X",
-        " ", "O", " ",
-        "X", " ", "X"
-    };
-    */
-
     prevNavIndex_ = navIndex_;
-    if(keyName == "W") {
-        starsViewBG_->move(0, -height_-(height_/2));
-        navIndex_-= 3;
-    } else if(keyName == "A") {
-        starsViewBG_->move(-width_-(width_/2), 0);
-    } else if(keyName == "S") {
-        starsViewBG_->move(0, height_+(height_/2));
-        navIndex_+= 3;
-    } else {
-        starsViewBG_->move(width_+(width_/2), 0);
-    }
+    if(keyName == "W") navIndex_-= 3; // Go up in abstract "2d array"
+    else if(keyName == "A") navIndex_ -= 1; // Go left in abstract "2d array"
+    else if(keyName == "S") navIndex_+= 3; // Go down in abstract "2d array"
+    else navIndex_ += 1; // Go right in abstract "2d array"
 
-    if(navIndex_ > nav_.size() ||
-            navIndex_ < 0) {
+    /* Inspects the set boundaries of the navigation array */
+    if(navIndex_ > nav_.size()
+            || navIndex_ < 0
+            || nav_[navIndex_] == "X") {
         navIndex_ = prevNavIndex_;
+        return;
     }
-    nav_[navIndex_] = "O";
+    nav_[navIndex_] = "O"; // Select current index
 
+    if(keyName == "W") starsViewBG_->move(0, -height_-(height_/2));
+    else if(keyName == "A") starsViewBG_->move(-width_-(width_/2), 0);
+    else if(keyName == "S") starsViewBG_->move(0, height_+(height_/2));
+    else starsViewBG_->move(width_+(width_/2), 0);
 
-    qDebug() << "***********";
-    qDebug() << nav_[0] << nav_[1] << nav_[2];
-    qDebug() << nav_[3] << nav_[4] << nav_[5];
-    qDebug() << nav_[6] << nav_[7] << nav_[8];
-    qDebug() << "***********" << "\n";
-
-    /*
     int interval = 32;
     QTimer *ease = new QTimer();
     ease->setInterval(interval);
@@ -143,13 +129,19 @@ void MainWindow::keyPressed(QString keyName)
 
         if(startViewBG_->pos().y() >= MAX_Y) {
             startViewBG_->move(startViewBG_->pos().x(), MAX_Y);
+
             i_ = 0;
             ease->stop();
         }
 
+        switch(navIndex_) {
+            case 1: // Up
+                starsViewBG_->move(starsViewBG_->pos().x(), starsViewBG_->pos().y()-i);
+                startViewBG_->move(startViewBG_->pos().x(), startViewBG_->pos().y()-i);
+                break;
+        }
+
         if(keyName == "W") {
-            starsViewBG_->move(starsViewBG_->pos().x(), starsViewBG_->pos().y()-i);
-            startViewBG_->move(startViewBG_->pos().x(), startViewBG_->pos().y()-i);
         } else if(keyName == "A") {
             //starsViewBG_->move(starsViewBG_->pos().x(), starsViewBG_->pos().y());
             //startViewBG_->move(startViewBG_->pos().x(), startViewBG_->pos().y());
@@ -158,7 +150,6 @@ void MainWindow::keyPressed(QString keyName)
         }
     });
     ease->start();
-    */
 }
 
 /* IGNORE */

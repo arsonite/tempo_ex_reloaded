@@ -4,6 +4,8 @@
 #include "menuview.h"
 #include "controller/menucontroller.h"
 
+#include <vector>
+
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QMovie>
@@ -48,13 +50,21 @@ private:
     QMovie *stars_bg_;
     QLabel *starsViewBG_;
 
+    /* Array-based navigation system */
+    std::array<QString, 9> nav_ = {
+        "X", " ", "X",
+        " ", "O", " ",
+        "X", " ", "X"
+    };
+    int prevNavIndex_;
+    int navIndex_;
+
     int width_;
     int height_;
     int pos_max_x_;
     int pos_max_y_;
 
     int i_;
-    int counter_;
 };
 
 #endif // MAINWINDOW_H

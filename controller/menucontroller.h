@@ -3,25 +3,28 @@
 
 #include <map>
 
-#include <QObject>
+#include <QMainWindow>
 #include <QKeyEvent>
 
-/* The default keys for the menu */
-
-class MenuController: public QObject
+class MenuController: public QMainWindow
 {
 Q_OBJECT
 public:
     explicit MenuController();
     virtual ~MenuController() override;
 
-    void keyPressEvent(QKeyEvent *event);
-
+    /* The default keys for the menu */
     const std::map<int, QString> DEFAULT_KEYS_ = {
         {Qt::Key_W, "W"},
         {Qt::Key_A, "A"},
         {Qt::Key_S, "S"},
         {Qt::Key_D, "D"}};
+
+public slots:
+    void keyPressEvent(QKeyEvent *event) override;
+
+signals:
+    void keyPressed(QString keyName);
 };
 
 #endif // MENUCONTROLLER_H
